@@ -169,11 +169,11 @@ if (isset($_COOKIE['nombre_usuario'])) {
             </form>
                
              <div class="mensajes men1">
-                            Call center: <b>+51 941 906 589</b>
+                            Call center: <a href="https://wa.me/+51941906589?text=Necesito%20asistencia%20con%20mi%20Sistema%20LaraPOS,%20gracias." target="_blank"><b>+51 73 661123</b></a>
                             <br>
                             <b>V01 - 2022</b>
                             <br>
-                            www.tritiumperu.com
+                            <a style="color:#ffffff" href="https://lara-net.com/pos" target="_blank"><b>www.lara-net.com</b></a>
                         </div>
 
             </div >
