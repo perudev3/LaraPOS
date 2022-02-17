@@ -13,8 +13,8 @@ var app = new Vue({
             dialogFinish: false,
             textTitleFinish: "",
             textInfoFinish: "",
-            redirect_url: "/pos/pantalla_teclado.php",
-            customer_route: '/pos/ws/cliente.php',
+            redirect_url: "/laraPOS/pantalla_teclado.php",
+            customer_route: '/laraPOS/ws/cliente.php',
             amount_entered: 0,
             turned: 0,
             missing: 0,
@@ -35,7 +35,7 @@ var app = new Vue({
             venta_id: null,
             loading: false,
             element: null,
-            endPoint: '/pos/api/',
+            endPoint: '/laraPOS/api/',
             materia: 'products',
             categorySelected: null,
             categoryServiceSelected: null,
@@ -317,7 +317,7 @@ var app = new Vue({
         },
         getPreCuenta() {
 
-            const url = "/pos/archivos_impresion/precuenta.php?id=" + this.id_venta;
+            const url = "/laraPOS/archivos_impresion/precuenta.php?id=" + this.id_venta;
             var win = window.open(url, '_blank');
             win.focus();
             /*
@@ -338,7 +338,7 @@ var app = new Vue({
 
             /* if(!this.finished){
                  if(this.showPrint){
-                     location.href = "/pos/print.php?id_venta=" + this.id_venta;
+                     location.href = "/LaraPOS/print.php?id_venta=" + this.id_venta;
                  }else{
                      this.newSale();
                  }

@@ -13,7 +13,7 @@ var app = new Vue({
             dialogFinish: false,
             textTitleFinish: "",
             textInfoFinish: "",
-            redirect_url: "/pos/pantalla_teclado.php",
+            redirect_url: "/laraPOS/pantalla_teclado.php",
             customer_route: '/pos/ws/cliente.php',
             amount_entered: 0,
             turned: 0,

@@ -20,7 +20,7 @@ $porc_detraccion = $objcon->consulta_arreglo("SELECT * from porcentaje_detraccio
 
 <head>
     <meta charset="UTF-8">
-    <title>Usqay</title>
+    <title>laraPOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <link rel="shortcut icon" type="image/x-icon" href="usqay-icon.svg">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
