@@ -68,7 +68,7 @@ if (isset($_COOKIE['nombre_usuario'])) {
     <link rel="stylesheet" href="recursos/adminLTE/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="recursos/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="usqay-icon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
 
 </head>
 

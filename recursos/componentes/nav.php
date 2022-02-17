@@ -63,9 +63,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <!-- Logo -->
                 <a href="index.php" class="logo"  style="background: #00395e !important;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span  class="logo-mini"><img src='recursos/img/usqay-circle-icon.svg' width="80%"></span>
+                    <span  class="logo-mini"><img src='assets/imagenes/icono_lara.jpg' width="80%"></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span  class="logo-lg"><img src='recursos/img/usqay_logo.png'  height="60px"></span>
+                    <span  class="logo-lg"  style="background: #00395e !important;">
+                        <img src='assets/imagenes/logolara_rectangular.png'  height="60px">
+                    </span>
                 </a>
 
                 <!-- Header Navbar -->

@@ -23,7 +23,7 @@ if (!isset($_COOKIE['nombre_usuario'])) {
     header('Location: index.php');
 }
 $titulo_pagina = 'Apertura de Caja';
-$titulo_sistema = 'UsqayPOS';
+$titulo_sistema = 'LaraPOS';
 require_once('recursos/componentes/header_open.php');
 
 // CONSULTAS PARA LOS GRAFICOS

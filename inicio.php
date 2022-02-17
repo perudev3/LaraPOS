@@ -84,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="recursos/js/plugins/datatables/jquery-datatables.css" rel="stylesheet">
     <link href="recursos/css/bootstrap-overrides.css" rel="stylesheet">
     <link href="recursos/css/jquery-ui.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="usqay-icon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
 
     <!-- Morris para graficos -->
     <link rel="stylesheet" href="recursos/js/plugins/datatables/morris.css">
@@ -215,15 +215,15 @@ $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as to
     <header class="main-header">
 
         <!-- Logo -->
-                <a href="index.php" class="logo"  style="background: #00395e !important;">
+                <a href="index.php" class="logo"  style="background: #a4011e !important;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span  class="logo-mini"><img src='recursos/img/usqay-circle-icon.svg' width="80%"></span>
+                    <span  class="logo-mini"><img src='assets/imagenes/icono_lara.jpg' width="80%"></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span  class="logo-lg"><img src='recursos/img/usqay_logo.png'  height="60px"></span>
+                    <span  class="logo-lg"><img src='assets/imagenes/logolara_rectangular.png'  height="50px"></span>
                 </a>
 
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation" style="background: #00395e !important;">
+        <nav class="navbar navbar-static-top" role="navigation" style="background: #a4011e !important;">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>

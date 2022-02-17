@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="recursos/adminLTE/dist/css/skins/skin-blue.min.css">
-        <link rel="shortcut icon" type="image/x-icon" href="usqay-icon.svg">
+        <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
 
     </head>
     <!--
@@ -58,9 +58,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                      <!-- Logo -->
                 <a href="index.php" class="logo"  style="background: #0F4B81 !important;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span  class="logo-mini"><img src='recursos/img/usqay-circle-icon.svg' width="80%"></span>
+                    <span  class="logo-mini"><img src='assets/imagenes/icono_lara.jpg' width="80%"></span>
                     <!-- logo for regular state and mobile devices -->
-                     <span  class="logo-lg"><img src='recursos/img/usqay_logo.png'  height="60px"></span>
+                    <span  class="logo-lg"><img src='assets/imagenes/logolara_rectangular.png'  height="60px"></span>
                 </a>
 
                 <!-- Header Navbar -->

@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!--<link href="recursos/js/plugins/datatables/dataTables.tableTools.css" rel="stylesheet">-->
         <link href="recursos/css/bootstrap-overrides.css" rel="stylesheet">
         <link href="recursos/css/jquery-ui.css" rel="stylesheet">
-        <link rel="shortcut icon" type="image/x-icon" href="usqay-icon.svg">
+        <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
         <meta name="mobile-web-app-capable" content="yes"/>
         <!-- Ionicons -->
         <link rel="stylesheet" href="recursos/ionicons/css/ionicons.min.css">
@@ -80,9 +80,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- Logo -->
                 <a href="index.php" class="logo"  style="background: #00395e !important;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span  class="logo-mini"><img src='recursos/img/usqay-circle-icon.svg' width="80%"></span>
+                    <span  class="logo-mini"><img src='assets/imagenes/icono_lara.jpg' width="80%"></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span  class="logo-lg"><img src='recursos/img/usqay_logo.png'  height="60px"></span>
+                    <span  class="logo-lg"><img src='assets/imagenes/logolara_rectangular.png'  height="60px"></span>
                 </a>
 
                 <!-- Header Navbar -->
