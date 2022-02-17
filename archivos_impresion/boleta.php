@@ -19,7 +19,7 @@ require "../recursos/numletras/CifrasEnLetras.php";
 <body>
     <style>
         body {
-            font-family: "Lucida Console", Monaco, monospace;
+            font-family: "courier", Monaco, monospace;
             font-size: 12px;
             zoom: 180%;
             font-weight: 200;
@@ -193,10 +193,14 @@ require "../recursos/numletras/CifrasEnLetras.php";
     $bolsa = 0;
     $total_items = 0;
     ?>
-
-    <center><img src="../recursos/img/logo34.png" style="width: 70%; margin-bottom: 0px;"></center> <br>
-
-    <h3 class="title"><?php echo $config['nombre_negocio']; ?></h3>
+    <!--<center><img src="../recursos/img/logo34.png" style="width: 70%; margin-bottom: 0px;"></center> <br>-->
+    <?php if (file_exists("../recursos/img/logo34.png")) {?>
+        <center><img src="../recursos/img/logo34.png" style="width: 70%; margin-bottom: 0px;"></center> <br>
+    <?php }
+            else { ?>
+            <h3 class="title"><?php echo $config['nombre_negocio']; ?></h3>
+    <?php } ?>    
+    
     <p class="title"><?php echo "RUC: " . $config['ruc']; ?></p>
     <p class="title"><?php echo $config['razon_social']; ?></p>
     <p class="title"><?php echo $config['direccion']; ?></p>
@@ -385,7 +389,7 @@ require "../recursos/numletras/CifrasEnLetras.php";
             </tr>
 
     </table>
-    <h4 class="msg" style="text-transform: uppercase;"><?php echo CifrasEnLetras::convertirNumeroEnLetras(number_format($totalventa, 2, ',', '.'), 1, "nuevo sol", "nuevos soles", true, "céntimo", "", false) ?></h4>
+    <h4 class="msg" style="text-transform: uppercase;"><?php echo CifrasEnLetras::convertirNumeroEnLetras(number_format($totalventa, 2, ',', '.'), 1, "sol", "soles", true, "céntimos", "", false) ?></h4>
 
 <?php
         } else {
@@ -420,7 +424,7 @@ require "../recursos/numletras/CifrasEnLetras.php";
                             ?></b></td>
     </tr>
     </table>
-    <h4 class="msg" style="text-transform: uppercase;"><?php echo CifrasEnLetras::convertirNumeroEnLetras(number_format($venta['total'], 2, ',', '.'), 1, "nuevo sol", "nuevos soles", true, "céntimo", "", false)
+    <h4 class="msg" style="text-transform: uppercase;"><?php echo CifrasEnLetras::convertirNumeroEnLetras(number_format($venta['total'], 2, ',', '.'), 1, "sol", "soles", true, "céntimo", "", false)
                                                         ?></h4>
 
 <?php
@@ -523,7 +527,7 @@ if (is_array($cuotas)) :
 <div class="msg2" style="padding: 0px 0px;">
     <!--   <p>Para ver el documento visita <b><?php echo $config['pagina_web']; ?></b></p>-->
 
-    <p><b>Autorizado por la SUNAT</b> mediante Resolucion de Intendencia No. <b>034-0050005315</b></p>
+    <p><b>Autorizado por la SUNAT</b> mediante Resolucion de Intendencia No. <b>034-00</b></p>
     <br>
     <!--  <p><b>USQAY</b>, es Facturacion Electronica visitanos en www.sistemausaqy.com o www.facebook.com/usqayperu</p>
 -->

@@ -18,7 +18,7 @@ $config_cuentas="";
 <body>
     <style>
         body {
-            font-family: "Lucida Console", Monaco, monospace;
+            font-family: "courier", Monaco, monospace;
             font-size: 12px;
             zoom: 200%;
             font-weight: 200;
@@ -183,10 +183,10 @@ $config_cuentas = $objcon->consulta_arreglo("SELECT cu.numero_cuenta FROM config
     $total_items = 0;
     ?>
 
-    <center><img src="../recursos/img/logo34.png"  style="width: 70%; margin-bottom: 0px;"></center> <br>
+    <!--<center><img src="../recursos/img/logo34.png"  style="width: 70%; margin-bottom: 0px;"></center> <br>-->
 
 
-<!-- <h3 class="title"><?php echo $config['nombre_negocio']; ?></h3> -->
+<h3 class="title"><?php echo $config['nombre_negocio']; ?></h3>
 <!-- <p class="title"><?php echo "RUC: ".$config['ruc']; ?></p> -->
 <p class="title"><?php echo $config['razon_social']; ?></p>
 <p class="title"><?php echo $config['direccion']; ?></p>
