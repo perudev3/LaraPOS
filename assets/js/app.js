@@ -1408,7 +1408,9 @@ var app = new Vue({
             this.nextOrPrevServicesDB(url);
 
         },
-        getMyProductsFromDB(route, upperStep = false) {
+
+        //FUNCION DEL SCROLL AL INGRESAR EN LA VISTA PANTALLA_TECLADO
+        /* getMyProductsFromDB(route, upperStep = false) {
             //
             axios.get(route)
                 .then(response => {
@@ -1435,7 +1437,8 @@ var app = new Vue({
                         this.element.scrollTop = 0;
                     }
                 });
-        },
+        }, */
+
         selectDetail(index) {
             this.details.map((detail, i) => index == i ? detail.selected = true : detail.selected = false);
         },

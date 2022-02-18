@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!--<link href="recursos/js/plugins/datatables/dataTables.tableTools.css" rel="stylesheet">-->
         <link href="recursos/css/bootstrap-overrides.css" rel="stylesheet">
         <link href="recursos/css/jquery-ui.css" rel="stylesheet">
-        <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/imagenes/icono_lara.jpg">
         <meta name="mobile-web-app-capable" content="yes"/>
         <!-- Ionicons -->
         <link rel="stylesheet" href="recursos/ionicons/css/ionicons.min.css">

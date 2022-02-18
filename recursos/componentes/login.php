@@ -69,7 +69,13 @@ if (isset($_COOKIE['nombre_usuario'])) {
     <link rel="stylesheet" href="recursos/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
-
+    <style>
+        @media (max-width:990px) {
+            #usuario {
+                right: 35px !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -104,7 +110,7 @@ if (isset($_COOKIE['nombre_usuario'])) {
 
                 <div class="">
                 <!--  <span  class="" id="basic-addon1"><i class="fas fa-user"></i> </span>-->
-                    <input type="text" class="form-control" placeholder="Ingrese su usuario." name='documento'>
+                    <input id="usuario" type="text" class="form-control" placeholder="Ingrese su usuario." name='documento' style="margin-top: 40px;position: absolute;float: right;right: 63px;"> 
                 </div>
                 <br>
               
@@ -135,9 +141,9 @@ if (isset($_COOKIE['nombre_usuario'])) {
                     </div>
                     <input type="hidden" name="caja" value="<?php echo $_GET["idc"]; ?>" />
                 <?php else : ?>
-                    <div class="">
+                    <div class="" style="visibility: hidden;">
                  
-                        <select type="hidden" class="form-control" name="caja" value="1">
+                        <select class="form-control" name="caja" value="1">
                             <?php
                             include_once('nucleo/include/MasterConexion.php');
                             $conn0 = new MasterConexion();

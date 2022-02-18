@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!--<link href="recursos/js/plugins/datatables/dataTables.tableTools.css" rel="stylesheet">-->
         <link href="recursos/css/bootstrap-overrides.css" rel="stylesheet">
         <link href="recursos/css/jquery-ui.css" rel="stylesheet">
-        <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/imagenes/icono_lara.jpg">
         <meta name="mobile-web-app-capable" content="yes"/>
         <!-- Ionicons -->
         <link rel="stylesheet" href="recursos/ionicons/css/ionicons.min.css">
@@ -102,11 +102,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- Menu Toggle Button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                    <span class="hidden-xs">Hola.-, <?php echo $_COOKIE["nombre_usuario"]; ?> </span><span class="caret"></span>
+                                    <span class="hidden-xs">Hola, <?php echo $_COOKIE["nombre_usuario"]; ?> </span><span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- The user image in the menu -->
-                                    <li class="user-header">
+                                    <li class="user-header" style="height: 77px;">
                                     
                                         <p>
                                             <?php echo $_COOKIE["nombre_usuario"]; ?>
@@ -116,9 +116,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        <div class="pull-left">
+                                        <!-- <div class="pull-left">
                                             <a href="manual/index.html" target="_blank" class="btn btn-warning btn-flat">Manual</a>
-                                        </div>
+                                        </div> -->
                                         <div class="pull-right">
                                             <a href="logout_sistema.php" class="btn btn-default btn-flat">Salir del Sistema</a>
                                         </div>

@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="recursos/adminLTE/dist/css/skins/skin-blue.min.css">
-        <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/imagenes/icono_lara.jpg">
 
     </head>
     <!--
@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <header class="main-header">
 
                      <!-- Logo -->
-                <a href="index.php" class="logo"  style="background: #0F4B81 !important;">
+                <a href="index.php" class="logo"  style="background: #00395e !important;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span  class="logo-mini"><img src='assets/imagenes/icono_lara.jpg' width="80%"></span>
                     <!-- logo for regular state and mobile devices -->
