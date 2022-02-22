@@ -81,15 +81,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <header class="main-header">
 
                <!-- Logo -->
-                <a href="index.php" class="logo"  style="background: #00395e !important;">
+                <a href="index.php" class="logo"  style="background: #a4011e !important;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span  class="logo-mini"><img src='assets/imagenes/icono_lara.jpg' width="80%"></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span  class="logo-lg"><img src='assets/imagenes/logolara_rectangular.png'  height="60px"></span>
+                    <span  class="logo-lg"><img src='assets/imagenes/logolara_rectangular.png'  height="40px"></span>
                 </a>
 
                 <!-- Header Navbar -->
-                <nav class="navbar navbar-static-top" role="navigation"  style="background: #00395e !important;">
+                <nav class="navbar navbar-static-top" role="navigation"  style="background: #a4011e !important;">
                     <!-- Sidebar toggle button-->
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>

@@ -20,9 +20,13 @@ $porc_detraccion = $objcon->consulta_arreglo("SELECT * from porcentaje_detraccio
 
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>laraPOS</title>
+=======
+    <title>LaraPOS</title>
+>>>>>>> dev-samuel
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    <link rel="shortcut icon" type="image/x-icon" href="usqay-icon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imagenes/icono_lara.jpg">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> -->
     <link rel="stylesheet" href="assets/css/css.css">
@@ -36,10 +40,9 @@ $porc_detraccion = $objcon->consulta_arreglo("SELECT * from porcentaje_detraccio
 
 <body>
     <header>
-
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background: #a4011e !important;">
             <a class="navbar-brand" href="inicio.php">
-                <img src="assets/imagenes/usqay_logo.png" width="120" alt="" loading="lazy">
+                <img src="assets/imagenes/logolara_rectangular.png" width="120" alt="" loading="lazy">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -85,7 +88,7 @@ $porc_detraccion = $objcon->consulta_arreglo("SELECT * from porcentaje_detraccio
         </div>
     </div>
     <!--Fin Modal-->
-    <main id="app">
+    <main id="app" style="margin-top: 16px;">
         <div class="container-fluid">
             <input id="id_caja" type="hidden" value="<?php echo $_COOKIE['id_caja']; ?>">
             <v-app style="background: none; height: 100vh">

@@ -13,8 +13,13 @@ var app = new Vue({
             dialogFinish: false,
             textTitleFinish: "",
             textInfoFinish: "",
+<<<<<<< HEAD
             redirect_url: "/laraPOS/pantalla_teclado.php",
             customer_route: '/laraPOS/ws/cliente.php',
+=======
+            redirect_url: "/LaraPOS/pantalla_teclado.php",
+            customer_route: '/LaraPOS/ws/cliente.php',
+>>>>>>> dev-samuel
             amount_entered: 0,
             turned: 0,
             missing: 0,
@@ -35,7 +40,11 @@ var app = new Vue({
             venta_id: null,
             loading: false,
             element: null,
+<<<<<<< HEAD
             endPoint: '/laraPOS/api/',
+=======
+            endPoint: '/LaraPOS/api/',
+>>>>>>> dev-samuel
             materia: 'products',
             categorySelected: null,
             categoryServiceSelected: null,
@@ -140,7 +149,7 @@ var app = new Vue({
     },
     methods: {
 
-        isNumber: function (evt) {
+        isNumber: function(evt) {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
@@ -151,7 +160,7 @@ var app = new Vue({
         },
 
 
-        isAlpha: function (evt) {
+        isAlpha: function(evt) {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if (!((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46)) {
@@ -169,7 +178,7 @@ var app = new Vue({
             formData.append("q", this.nCustomer.document);
             axios.post(url, formData)
                 .then(response => {
-                    
+
                     let data = response.data;
                     if (data.length > 0) {
                         this.nCustomer.name = data[0].nombre;
@@ -182,19 +191,19 @@ var app = new Vue({
                     }
                 })
                 .catch(error => {
-                    
+
                 });
         },
 
         searchClientSunat() {
-            
+
             const url = `${this.endPoint}cliente.php`;
             const formData = new FormData();
             formData.append("op", "busca");
             formData.append("q", this.nCompany.document);
             axios.post(url, formData)
                 .then(response => {
-                    
+
                     let data = response.data;
                     if (data.length > 0) {
                         this.nCompany.name = data[0].nombre;
@@ -207,7 +216,7 @@ var app = new Vue({
                     }
                 })
                 .catch(error => {
-                    
+
                 });
         },
         listenKeysPressed() {
@@ -233,8 +242,8 @@ var app = new Vue({
 
 
             if (window.event && window.event.keyCode == 113) { //f2  TICKET
-                
-                
+
+
                 this.paymentToServerDB(0);
             }
 
@@ -248,17 +257,17 @@ var app = new Vue({
 
             // PARA CREDITOS
             if (window.event && window.event.keyCode == 119) { //f8  CREDITO - NOTA VENTA
-                
+
                 this.paymentToServerDB(3);
             }
 
             if (window.event && window.event.keyCode == 120) { //f9  CREDITO - BOLETA
-                
+
                 this.paymentToServerDB(4);
             }
 
             if (window.event && window.event.keyCode == 121) { //f10 CREDITO - FACTURA
-                
+
                 this.paymentToServerDB(5);
             }
         },
@@ -296,7 +305,7 @@ var app = new Vue({
             formData.append("id", this.id_venta);
             axios.post(url, formData)
                 .then(response => {
-                    
+
                     if (response.data.ok == true) {
                         // this.presentToast(response.data.msg);
                         setInterval(() => {
@@ -307,7 +316,7 @@ var app = new Vue({
                     }
                 })
                 .catch(error => {
-                    
+
                 });
         },
         deleteSale() {
@@ -328,8 +337,8 @@ var app = new Vue({
 */
             axios.post(url, formData)
                 .then(response => {
-                    
-                    
+
+
                 });
         },
         okSale() {
@@ -374,25 +383,25 @@ var app = new Vue({
 
             axios.post(url, formData)
                 .then(response => {
-                    
+
                     this.dialogLoading = false;
                     const dataResponse = response.data;
 
                     this.monto_credito = dataResponse[0].Monto;
                     this.consumo_credito = dataResponse[0].Consumo;
                     this.fechaLimite_credito = dataResponse[0].FechaLimite;
-                    
-                    
-                    
-                    
+
+
+
+
                     let total_credito = parseInt(this.consumo_credito) + parseInt(this.montoFaltante);
-                    
+
                     var f = new Date();
                     let hoy = f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate();
-                    
+
                     if (Date.parse(this.fechaLimite_credito) < Date.parse(hoy)) {
                         this.msj_credito += " Excedio la fecha limite del credito " + '\n';
-                        
+
                     }
                     if (total_credito > this.monto_credito) {
                         this.msj_credito += " Monto limite de credito excedido ";
@@ -400,7 +409,7 @@ var app = new Vue({
 
                 })
                 .catch(err => {
-                    
+
                     this.dialogLoading = false;
                 });
             this.amountCuota = parseFloat(this.montoFaltante);
@@ -437,10 +446,10 @@ var app = new Vue({
             */
             if (document.getElementById('isDetraccion') == null) {
                 var isChecked = false;
-                
+
             } else {
                 var isChecked = document.getElementById('isDetraccion').checked;
-                
+
             }
 
 
@@ -455,7 +464,7 @@ var app = new Vue({
                     //validar solo para boletas y facturas 
                     if (tipo_documento == 2 || tipo_documento == 1) {
                         if (isChecked) {
-                            
+
                             const pago_efectivo = {
                                 id_venta: this.id_venta,
                                 medio: 'EFECTIVO_DETRACCION',
@@ -509,7 +518,7 @@ var app = new Vue({
 
 
             if (this.discount > 0) {
-                
+
                 const descuento_pago = {
                     id_venta: this.id_venta,
                     medio: 'DESCUENTO',
@@ -590,13 +599,13 @@ var app = new Vue({
                 formDatas.append('monto', this.montoFaltante);
                 axios.post(url, formDatas)
                     .then(oResponse => {
-                        
+
                         this.dialogLoading = true;
                         const dataResponse = oResponse.data;
 
                     })
                     .catch(err => {
-                        
+
 
                         this.dialogLoading = false;
                     });
@@ -642,14 +651,14 @@ var app = new Vue({
             formData.append('expiresDate', this.expiresDate);
             formData.append('venta_al_credito', JSON.stringify(this.venta_al_credito));
             //
-            
+
             // 
 
 
 
             axios.post(url, formData)
                 .then(response => {
-                    
+
                     this.dialogLoading = false;
                     const dataResponse = response.data;
 
@@ -661,12 +670,12 @@ var app = new Vue({
                         this.okSale();
                     } else {
                         this.presentToast(dataResponse.message.errors);
-                        
+
                     }
 
                 })
                 .catch(err => {
-                    
+
                     this.dialogLoading = false;
                 })
 
@@ -674,7 +683,7 @@ var app = new Vue({
         pulsar() {
             document.onkeydown = () => {
                 if (window.event.keyCode == 13) {
-                    
+
                     var valor = document.getElementById("search_manual").value;
                     let url = '';
                     if (valor != "") {
@@ -750,8 +759,8 @@ var app = new Vue({
 
             this.tipo_guia = tipo_guia;
             this.serie_numero = serie_numero;
-            
-            
+
+
             this.sheet_guias = false;
 
         },
@@ -782,9 +791,9 @@ var app = new Vue({
                 return;
             }
 
-            
-            
-            
+
+
+
             if (val > parseFloat(this.amountCuota)) {
                 this.presentToast("El importe es mayor al monto restante");
                 return;
@@ -801,8 +810,8 @@ var app = new Vue({
             let divisiondays = parseInt(this.expiresDate / this.venta_al_credito.length);
             let diasAux = 0;
 
-            this.venta_al_credito.forEach(async (e, key) => {
-                
+            this.venta_al_credito.forEach(async(e, key) => {
+
 
                 let hoy = new Date();
                 let dayToSuma = divisiondays * (key + 1);
@@ -816,11 +825,11 @@ var app = new Vue({
                 e.fecha_de_pago = await this.getDateFormat(hoy);
 
             })
-            
+
             //this.amountCuota = parseFloat(this.amountCuota) - val;
             this.amountCuota = parseFloat(this.amountCuota) - val;
 
-            
+
             submitEvent.target.elements.amountCuota.value = this.amountCuota;
             this.sheet_cuota = false;
         },
@@ -832,22 +841,22 @@ var app = new Vue({
             let divisiondays = parseInt(this.expiresDate / this.venta_al_credito.length);
             let diasAux = 0;
 
-            this.venta_al_credito.forEach(async (e, key) => {
-                
+            this.venta_al_credito.forEach(async(e, key) => {
 
-                let hoy = new Date();
-                let dayToSuma = divisiondays * (key + 1);
-                hoy.setDate(hoy.getDate() + dayToSuma);
-                if ((key + 1) == this.venta_al_credito.length) {
-                    let diff_day = this.expiresDate - dayToSuma;
 
-                    hoy.setDate(hoy.getDate() + diff_day);
-                }
-                e.cuota = key + 1;
-                e.fecha_de_pago = await this.getDateFormat(hoy);
+                    let hoy = new Date();
+                    let dayToSuma = divisiondays * (key + 1);
+                    hoy.setDate(hoy.getDate() + dayToSuma);
+                    if ((key + 1) == this.venta_al_credito.length) {
+                        let diff_day = this.expiresDate - dayToSuma;
 
-            })
-            //const parseAmount = Number(this.amount_entered) - Number(venta_medio_pago.monto);
+                        hoy.setDate(hoy.getDate() + diff_day);
+                    }
+                    e.cuota = key + 1;
+                    e.fecha_de_pago = await this.getDateFormat(hoy);
+
+                })
+                //const parseAmount = Number(this.amount_entered) - Number(venta_medio_pago.monto);
 
             //this.amount_entered = parseAmount;
         },
@@ -940,7 +949,7 @@ var app = new Vue({
         getFormValues(submitEvent) {
             const val = submitEvent.target.elements.discount.value;
             const parseVal = Number(val).toFixed(2);
-            
+
             if (parseVal > Number(this.total)) {
                 this.closeDiscountModal();
                 submitEvent.target.elements.discount.value = "";
@@ -975,7 +984,7 @@ var app = new Vue({
             $('#exampleModal3').modal('hide');
         },
         setDiscount() {
-            
+
         },
         getUrlParams() {
             const queryString = window.location.search;
@@ -992,7 +1001,7 @@ var app = new Vue({
             axios.get(url)
                 .then(response => {
                     const data = response.data;
-                    
+
                     const data_details = data.producto_venta;
                     if (!data.finished) {
                         if (data.cliente) {
@@ -1018,7 +1027,7 @@ var app = new Vue({
                                 };
                                 return parseData;
                             });
-                            
+
                         }
                     } else {
                         this.finished = true;
@@ -1026,7 +1035,7 @@ var app = new Vue({
                         this.showPrint = false;
                         this.textInfoFinish = "Puede visualizarla en su reporte de ventas";
                         this.dialogFinish = true;
-                        
+
                         this.newSale();
                     }
                 });
@@ -1035,7 +1044,7 @@ var app = new Vue({
             const route = `${this.endPoint}cliente.php?q=${q}`;
             axios.get(route)
                 .then(response => {
-                    
+
                     if (response.data == null) {
                         this.presentToast("Documento ingresado es incorrecto");
                     }
@@ -1046,19 +1055,19 @@ var app = new Vue({
                 });
 
         },
-        update:function(e){
+        update: function(e) {
             this.search = e.target.value;
         },
         /*update: _.debounce(function (e) {
             this.search = e.target.value;
         }, 1000),*/
-        updateCustomer: _.debounce(function (e) {
-            
+        updateCustomer: _.debounce(function(e) {
+
             if (e.target.value.length >= 8) {
-                
+
                 this.search_customer = e.target.value;
             } else {
-                
+
             }
         }, 1000),
         changeMateria() {
@@ -1192,7 +1201,7 @@ var app = new Vue({
 
                     })
                     .catch(error => {
-                        
+
                     })
             })
             this.sale = !this.sale;
@@ -1214,7 +1223,7 @@ var app = new Vue({
 
             axios.post(url, data)
                 .then(response => {
-                    
+
                     const responseData = response.data;
                     if (responseData.ok == "false") {
                         this.presentToast("Cliente modificado con exíto");
@@ -1229,7 +1238,7 @@ var app = new Vue({
                     this.viewCustomer();
                 })
                 .catch(err => {
-                    
+
                     this.loading = false;
                 });
 
@@ -1264,7 +1273,7 @@ var app = new Vue({
                     this.viewCustomer();
                 })
                 .catch(err => {
-                    
+
                     this.loading = false;
                 });
         },
@@ -1330,11 +1339,11 @@ var app = new Vue({
             return Number((detail.quantity * detail.price) - discountTotal).toFixed(2);
         },
         myValues(taxonomy) {
-            
+
             const url = `${this.endPoint}taxonomiap_valor.php?padre=${taxonomy.id}&q=valores`;
             axios.get(url)
                 .then(response => {
-                    
+
                     this.taxonomyp_values = response.data;
                     this.step++;
                 })
@@ -1348,8 +1357,8 @@ var app = new Vue({
                 })
         },
         myProducts(category) {
-            
-            
+
+
             this.categorySelected = category;
             this.productsPage = 0;
             let url = '';
@@ -1359,7 +1368,7 @@ var app = new Vue({
                 url = `${this.endPoint}taxonomiap_valor.php?id=${category.id_taxonomiap}&valor=${category.valor}&almacen=${this.dialogm1.id}&q=products&page=${this.productsPage}`;
             }
 
-            
+
             this.getMyProductsFromDB(url, true);
 
         },
@@ -1412,7 +1421,7 @@ var app = new Vue({
             //
             axios.get(route)
                 .then(response => {
-                    
+
                     this.productsSelected = response.data;
 
                     if (upperStep) {
@@ -1423,10 +1432,10 @@ var app = new Vue({
                 });
         },
         getMyServicesFromDB(route, upperStep = false) {
-            
+
             axios.get(route)
                 .then(response => {
-                    
+
                     this.servicesSelected = response.data;
 
                     if (upperStep) {
@@ -1461,7 +1470,7 @@ var app = new Vue({
 
             axios.post(url, formData)
                 .then(response => {
-                    
+
                     if (response.data.ok == true) {
                         if (response.data.finished) {
                             this.finished = true;
@@ -1479,7 +1488,7 @@ var app = new Vue({
                     }
                 })
                 .catch(error => {
-                    
+
                 })
 
 
@@ -1489,13 +1498,13 @@ var app = new Vue({
             // Verificar que producto no exista
             const exists = this.details.filter(detail => detail.id === product.id && detail.is_product == true && detail.id_secundario === product.id_secundario);
             // const exists = this.details.filter((detail => detail.id === product.id && detail.is_product == true)||(detail => detail.id === product.id && detail.is_product == true && detail.id_secundario===product.id_secundario ));
-            
-            
+
+
 
             if (exists.length > 0) {
                 exists[0].quantity++ // si el producto ya existe se aumenta la cantidad
-                
-                this.updateItemSaleDB(this.details.findIndex(idx => idx.id === exists[0].id));
+
+                    this.updateItemSaleDB(this.details.findIndex(idx => idx.id === exists[0].id));
                 // this.updateItemSaleDB(this.details.findIndex(idx => idx.id === exists[0].id)); 1594
                 this.backToFirstStep();
                 return;
@@ -1569,7 +1578,7 @@ var app = new Vue({
 
             axios.get(url_prices)
                 .then(response => {
-                    
+
                     const prices = response.data;
                     if (prices.length > 0) {
                         this.showMeMyPrices(detail, prices);
@@ -1624,7 +1633,7 @@ var app = new Vue({
 
             // Crear en venta en caso no exista
             this.details.unshift(detail);
-            
+
             if (!this.id_venta) {
                 this.addFirstItemToSale(detail);
             } else {
@@ -1635,7 +1644,7 @@ var app = new Vue({
         },
 
         addServiceToDetails(service) {
-            
+
             const detail = {
                 id: service.id,
                 quantity: 1,
@@ -1729,7 +1738,7 @@ var app = new Vue({
                     }
                 })
                 .catch(error => {
-                    
+
                 })
         },
         backToFirstStep() {
@@ -1751,8 +1760,8 @@ var app = new Vue({
                 incluye_impuesto: product_price.incluye_impuesto
             };
 
-            if(product.id_secundario){
-                product.nombre = product.nombre+" "+product_price.descripcion;
+            if (product.id_secundario) {
+                product.nombre = product.nombre + " " + product_price.descripcion;
             }
             // Verificar que producto no exista
             const exists = this.details.filter(detail => detail.id === product.id && detail.is_product == true && detail.id_secundario === product.id_secundario);
@@ -1826,7 +1835,7 @@ var app = new Vue({
             }
         },
         addDetailQuantity(index) {
-            
+
             //
             this.details[index].quantity++;
             this.updateItemSaleDB(index);
@@ -1883,25 +1892,25 @@ var app = new Vue({
                             this.showPrint = false;
                             this.textInfoFinish = "Puede visualizarla en su reporte de ventas";
                             this.dialogFinish = true;
-                            
+
                         } else {
                             // 
                             //this.presentToast(response.data.msg);
                             this.id_venta = response.data.id_venta;
                         }
                     } else {
-                        
+
                         this.presentToast(response.data.msg);
                     }
                 })
                 .catch(error => {
-                    
+
                 })
         },
         //axalpusa busqueda 
         searchProductFromDB(url) {
 
-            
+
             axios.get(url)
                 .then(response => {
 
@@ -1911,16 +1920,16 @@ var app = new Vue({
                      this.categorySelected = null;*/
                     if (this.productsSelected.length == 1) {
                         this.addProduct(this.productsSelected[0]);
-                        
+
                     } else if (this.productsSelected.length == 0) {
-                        
+
                     } else if (this.productsSelected.length >= 2) {
-                        
+
                         this.step = 3;
                         this.categorySelected = null;
-                        
+
                     } else {
-                        
+
                         this.search = "";
                         this.presentToast("Producto no encontrado");
                     }
@@ -1930,7 +1939,7 @@ var app = new Vue({
         nextSearchProducts() {
             let url = '';
             this.productsSearchPage++;
-            
+
             if (this.dialogm1.id === 0) {
                 url = `${this.endPoint}producto_taxonomiap.php?q=${this.search}&page=${this.productsSearchPage}`;
             } else {
@@ -1951,7 +1960,7 @@ var app = new Vue({
             this.searchProductFromDB(url);
         },
         searchServiceFromDB(url) {
-            
+
             axios.get(url)
                 .then(response => {
                     this.servicesSelected = response.data;
@@ -2112,7 +2121,7 @@ var app = new Vue({
             return total.toFixed(2);
         },
         filteredCustomers() {
-            
+
             return this.customers.filter(customer => customer.name.toLowerCase().includes(this.search_customer.toLowerCase()) || customer.document.includes(this.search_customer));
         },
         montoFaltante() {
@@ -2123,7 +2132,7 @@ var app = new Vue({
         }
     },
     watch: {
-        search: function (val) {
+        search: function(val) {
             if (val.length > 0) {
                 if (this.materia == 'products') {
                     let url = '';
@@ -2153,10 +2162,10 @@ var app = new Vue({
 
             }
         },
-        dialogm1: function (val) {
-            
+        dialogm1: function(val) {
+
             if (this.step === 3) {
-                
+
                 if (this.categorySelected != null) {
                     this.productsPage = 0;
                     let url = '';

@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!--<link href="recursos/js/plugins/datatables/dataTables.tableTools.css" rel="stylesheet">-->
         <link href="recursos/css/bootstrap-overrides.css" rel="stylesheet">
         <link href="recursos/css/jquery-ui.css" rel="stylesheet">
-        <link rel="shortcut icon" type="image/x-icon" href="usqay-icon.svg">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/imagenes/icono_lara.jpg">
         <meta name="mobile-web-app-capable" content="yes"/>
         <!-- Ionicons -->
         <link rel="stylesheet" href="recursos/ionicons/css/ionicons.min.css">
@@ -77,15 +77,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <header class="main-header">
 
                        <!-- Logo -->
-                 <a href="index.php" class="logo"  style="background: #00395e !important;">
+                 <a href="index.php" class="logo"  style="background: #a4011e !important;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span  class="logo-mini"><img src='assets/imagenes/icono_lara.jpg' width="80%"></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span  class="logo-lg"><img src='assets/imagenes/logolara_rectangular.png'  height="60px"></span>
+                    <span  class="logo-lg"><img src='assets/imagenes/logolara_rectangular.png'  height="50px"></span>
                 </a>
 
                 <!-- Header Navbar -->
-                <nav class="navbar navbar-static-top" role="navigation"   style="background: #00395e !important;">
+                <nav class="navbar navbar-static-top" role="navigation"   style="background: #a4011e !important;">
                     <!-- Sidebar toggle button-->
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>
@@ -102,20 +102,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- The user image in the menu -->
-                                    <li class="user-header">
+                                    <li class="user-header" style="height: 77px;">
                                         <p>
                                             <?php echo $_COOKIE["nombre_usuario"]; ?>
-                                            <small>Usuario del Sistema</small>
+                                            <small>  Usuario del Sistema</small>
                                         </p>
                                     </li>
 
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        <div class="pull-left">
+                                        <!-- <div class="pull-left">
                                             <a href="manual/index.html" target="_blank" class="btn btn-warning btn-flat">Manual</a>
-                                        </div>
+                                        </div> -->
                                         <div class="pull-right">
-                                            <a href="logout_sistema.php" class="btn btn-default btn-flat">Salir del Sistema</a>
+                                            <a href="logout_sistema.php" class="btn btn-default btn-flat">
+                                                <i class="fa fa-logout"></i>Salir del Sistema
+                                            </a>
                                         </div>
                                     </li>
                                 </ul>
