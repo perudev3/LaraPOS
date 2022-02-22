@@ -48,7 +48,8 @@ $porc_detraccion = $objcon->consulta_arreglo("SELECT * from porcentaje_detraccio
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+            <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
 
                 </ul>
@@ -95,7 +96,8 @@ $porc_detraccion = $objcon->consulta_arreglo("SELECT * from porcentaje_detraccio
 
                 <div class="row" v-if="sale">
 
-                    <div class="col-md-8 seleccionar" id="seleccionar">
+                    <!-- <div class="col-md-8 seleccionar" id="seleccionar"> -->
+                    <div class="col-md-8 seleccionar">
 
                         <div class="row">
                             <div class="col-md-3 categoria-caja grupo-materias">

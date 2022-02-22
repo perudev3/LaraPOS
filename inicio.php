@@ -201,7 +201,8 @@ if($mas_utilidad != 0){
 $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as total FROM venta WHERE tipo_comprobante = -1 AND estado_fila = 1  GROUP by id_cliente");
 
 ?>
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!-- <body class="hold-transition skin-blue sidebar-mini sidebar-collapse"> -->
+<body class="hold-transition skin-blue sidebar-mini">
     <style>
         .cotoscard{
             
@@ -241,7 +242,7 @@ $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as to
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
-                            <li class="user-header">
+                            <li class="user-header" style="height: 77px;">
                                 <p>
                                     <?php echo $_COOKIE["nombre_usuario"]; ?>
                                     <small>Usuario del Sistema</small>
@@ -250,9 +251,9 @@ $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as to
 
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
+                                <!-- <div class="pull-left">
                                     <a href="manual/index.html" target="_blank" class="btn btn-warning btn-flat">Manual</a>
-                                </div>
+                                </div> -->
                                 <div class="pull-right">
                                     <a href="logout_sistema.php" class="btn btn-default btn-flat">Salir del Sistema</a>
                                 </div>
@@ -312,7 +313,7 @@ $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as to
                                     </div>
                                     
                                     <div class="col-md-6">
-                                        <img src="recursos/img/sales.png" class="img-responsive" alt="">
+                                        <img src="recursos/img/caja-registradora.png" class="img-responsive" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +346,7 @@ $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as to
                                     <h4>Hora Punta</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <img src="recursos/img/time-is-money.png" class="img-responsive" alt="">
+                                    <img src="recursos/img/time-is-money2.png" class="img-responsive" alt="">
                                 </div>
                             </div>
                         </div>
@@ -362,7 +363,7 @@ $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as to
                                     <h4>Ventas por Retomar</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <img src="recursos/img/product.png" class="img-responsive" alt="">
+                                    <img src="recursos/img/bolsa-de-la-compra.png" class="img-responsive" alt="">
                                 </div>
                             </div>
                         </div>
@@ -379,7 +380,7 @@ $clientesCredito = $objcon->consulta_matriz("SELECT id_cliente, SUM(total) as to
                                     <h4>Comprobantes Emitidos</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <img src="recursos/img/target.png" class="img-responsive" alt="">
+                                    <img src="recursos/img/comprobado.png" class="img-responsive" alt="">
                                 </div>
                             </div>
                         </div>

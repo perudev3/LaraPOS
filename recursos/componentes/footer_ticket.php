@@ -7,7 +7,7 @@
     <!-- Default to the left -->
 
     <p class="text-center">
-        <strong > <a style="color: black;" href="https://sistemausqay.com/" target="_blank">Sistema Usqay - <?php echo date("Y"); ?></a> </strong>
+        <strong > <a style="color: black;" href="https://lara-net.com/" target="_blank">LARA POS - <?php echo date("Y"); ?></a> </strong>
     </p>
 
 </footer>
