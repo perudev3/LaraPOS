@@ -453,8 +453,8 @@ if (isset($_POST['op'])) {
 
             break;
 
-            /* case 'imprimir':
-            //echo "se imprimira un comprobante";
+            case 'imprimir':
+            echo "se imprimira un comprobante";
             $objconn = new caja();
           
             $tipo = $_POST['tipo'];
@@ -552,7 +552,7 @@ if (isset($_POST['op'])) {
 
                 if (isset($verificaImpresion['id'])) {
 
-                    $printer = $objconn->consulta_arreglo("SELECT * FROM impresoras WHERE caja='" . $id_caja . "' AND nombre='" . $verificaImpresion['impresora'] . "'");
+                    $printer = $objconn->consulta_arreglo("SELECT * FROM impresoras WHERE nombre='" . $verificaImpresion['impresora'] . "'");
 
                     $printerName = $verificaImpresion['impresora'];
                     $receipt = "NOTA DE VENTA - " . str_pad($id, 8, "0", STR_PAD_LEFT) . "\n\n";
@@ -563,7 +563,7 @@ if (isset($_POST['op'])) {
 
                     try {
 
-                        if ($printer['red'] == 1) {
+                        if ($printer['red'] == 1) { 
                             $pos_printer->connectTypeNetwork($printerName);
                         } else {
                             $pos_printer->connectTypeWindows($printerName);
@@ -688,12 +688,13 @@ if (isset($_POST['op'])) {
 
             echo json_encode($res);
 
-            break;*/
-        case 'imprimir':
+            break;
+        
+        /*case 'imprimir':
             $objconn = new caja();
             $objconn->consulta_simple("Insert into cola_impresion values(NULL, {$_POST['id']}, '{$_POST['tipo']}', {$_POST["id_caja"]}, '', 1)");
             echo json_encode(1);
-            break;
+            break;*/
         case 'addGuia':
             $objconn = new caja();
 

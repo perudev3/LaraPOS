@@ -130,7 +130,7 @@ $config_cuentas = $objcon->consulta_arreglo("SELECT cu.numero_cuenta FROM config
     $servicios = $objcon->consulta_matriz("SELECT s.nombre, sv.* from servicio_venta sv left join servicio s on sv.id_servicio = s.id WHERE sv.id_venta = $id_venta");
 
     $ventas = $objcon->consulta_arreglo("SELECT nombre FROM venta v, caja c WHERE v.id = $id_venta AND v.id_caja = c.id");
-    $medio_pago = $objcon->consulta_arreglo("SELECT * FROM venta_medio_pago WHERE id_venta = $id_venta AND medio NOT LIKE 'DESCUENTO'");
+    $medio_pago = $objcon->consulta_arreglo("SELECT group_concat(CONCAT(medio,'=', ROUND((monto-vuelto),2))) as medios FROM venta_medio_pago WHERE id_venta = $id_venta GROUP BY id_venta");
     $Descuento = $objcon->consulta_arreglo("SELECT * FROM venta_medio_pago WHERE id_venta = $id_venta AND medio = 'DESCUENTO'");
     $vuelto = $objcon->consulta_arreglo("SELECT vuelto FROM venta_medio_pago WHERE id_venta = $id_venta AND medio NOT LIKE 'DESCUENTO' and vuelto not like 0");
 
@@ -176,7 +176,7 @@ $config_cuentas = $objcon->consulta_arreglo("SELECT cu.numero_cuenta FROM config
     } else {
         $GEIG = "GRATUITA";
     }
-
+ 
     // echo json_encode($hash);
     $Pro_total = 0;
     $bolsa = 0;

@@ -13,13 +13,8 @@ var app = new Vue({
             dialogFinish: false,
             textTitleFinish: "",
             textInfoFinish: "",
-<<<<<<< HEAD
-            redirect_url: "/laraPOS/pantalla_teclado.php",
-            customer_route: '/laraPOS/ws/cliente.php',
-=======
             redirect_url: "/LaraPOS/pantalla_teclado.php",
             customer_route: '/LaraPOS/ws/cliente.php',
->>>>>>> dev-samuel
             amount_entered: 0,
             turned: 0,
             missing: 0,
@@ -40,11 +35,7 @@ var app = new Vue({
             venta_id: null,
             loading: false,
             element: null,
-<<<<<<< HEAD
-            endPoint: '/laraPOS/api/',
-=======
             endPoint: '/LaraPOS/api/',
->>>>>>> dev-samuel
             materia: 'products',
             categorySelected: null,
             categoryServiceSelected: null,

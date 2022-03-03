@@ -2,7 +2,6 @@
 
 //require_once('nucleo/include/MasterConexion.php'); // INICIO
 require_once('../nucleo/include/MasterConexion.php'); // WS CLIENTE
-require_once('../api/classes/PosPrinter.php');
 include_once('ValidacionCredito.php'); // VALIDA CREDITO DEL CLIENTE SHIT
 class Facturacion
 
@@ -26,7 +25,6 @@ class Facturacion
     public $observaciones = "";
     public $expiresDate = "";
     public $venta_al_credito = 0;
-    private $idCaja = 0;
 
 
     //TOKEN para enviar documentos
@@ -38,7 +36,7 @@ class Facturacion
     } */
 
 
-    public function __construct($cliente, $idVenta, $typeDocument, $descuentoGlobal, $medioPago, $tipo_guia, $serie_numero, $observaciones, $expiresDate, $venta_al_credito, $idCaja)
+    public function __construct($cliente, $idVenta, $typeDocument, $descuentoGlobal, $medioPago, $tipo_guia, $serie_numero, $observaciones, $expiresDate, $venta_al_credito)
     {
         $this->conection =  new MasterConexion();
         $this->idVenta = $idVenta;
@@ -50,9 +48,9 @@ class Facturacion
         $this->observaciones = $observaciones;
         $this->expiresDate = $expiresDate;
         $this->venta_al_credito = $venta_al_credito;
+
         // $this->cliente = $cliente;
         $this->cliente =  $this->conection->consulta_arreglo("SELECT * FROM cliente WHERE id='" . $cliente . "'");
-        $this->idCaja = $idCaja;
     }
 
     public function processItemWithSaleData()
@@ -279,48 +277,9 @@ class Facturacion
                                 $return['success'] = false;
                                 $return['message'] = ["errors" => "LA VENTA FUE EXITOSA PERO LOS MEDIOS DE PAGO NO SE PUDIERON REGISTRAR CSMRS"];
                             } else {
-                                $verificaImpresion = $this->conection->consulta_arreglo("SELECT * FROM configuracion_impresion WHERE caja='" . $this->idCaja . "' AND opcion='NOT' ");
-
-                                if (isset($verificaImpresion['id'])) {
-            
-                                    $printer = $this->conection->consulta_arreglo("SELECT * FROM impresoras WHERE nombre='" . $verificaImpresion['impresora'] . "'");
-            
-                                    $printerName = $verificaImpresion['impresora'];
-                                    $receipt = "NOTA DE VENTA - " . str_pad($this->idVenta, 8, "0", STR_PAD_LEFT) . "\n\n";
-                                    $pos_printer = new PosPrinter($this->idVenta, $printerName, $receipt);
-                                    
-                                    $success = true;
-                                    $texto = "Representacion impresa de un ticket el cual \n puede canjear por un comprobante electronico";
-                                    $msg = "VENTA EXITOSA";
-                                       
-                                    try {
-            
-                                        if ($printer['red'] == 1) {
-                                            $pos_printer->connectTypeNetwork($printerName);
-                                        } else {
-                                            $pos_printer->connectTypeWindows($printerName);
-                                        }
-            
-                                        $pos_printer
-                                            ->setShopName('ticket')
-                                            ->setTitleReceipt()
-                                            ->setItems()
-                                            ->setMontos()
-                                            ->setFooter(false, $texto)
-                                            ->cut()
-                                            ->pulse();
-            
-                                    } catch (Exception $e) {
-                                        $success = false;
-                                        $msg = "error";
-                                        $msg = $e->getMessage();
-                                    } finally {
-                                        $pos_printer->close();
-                                    }
                                 $return['success'] = true;
                                 $return['message'] = "VENTA EXITOSA";
                                 $return['showPrint'] = $this->validaImpreion();
-                                }
                             }
                         } else {
                             $return['success'] = false;
@@ -343,45 +302,6 @@ class Facturacion
                     $return['success'] = false;
                     $return['message'] = ["errors" => "LA VENTA FUE EXITOSA PERO LOS MEDIOS DE PAGO NO SE PUDIERON REGISTRAR CSMRS"];
                 } else {
-                    $verificaImpresion = $this->conection->consulta_arreglo("SELECT * FROM configuracion_impresion WHERE caja='" . $this->idCaja . "' AND opcion='NOT' ");
-
-                    if (isset($verificaImpresion['id'])) {
-
-                        $printer = $this->conection->consulta_arreglo("SELECT * FROM impresoras WHERE nombre='" . $verificaImpresion['impresora'] . "'");
-
-                        $printerName = $verificaImpresion['impresora'];
-                        $receipt = "NOTA DE VENTA - " . str_pad($this->idVenta, 8, "0", STR_PAD_LEFT) . "\n\n";
-                        $pos_printer = new PosPrinter($this->idVenta, $printerName, $receipt);
-                        
-                        $success = true;
-                        $texto = "Representacion impresa de un ticket el cual \n puede canjear por un comprobante electronico";
-                        $msg = "VENTA EXITOSA";
-                           
-                        try {
-
-                            if ($printer['red'] == 1) {
-                                $pos_printer->connectTypeNetwork($printerName);
-                            } else {
-                                $pos_printer->connectTypeWindows($printerName);
-                            }
-
-                            $pos_printer
-                                ->setShopName('ticket')
-                                ->setTitleReceipt()
-                                ->setItems()
-                                ->setMontos()
-                                ->setCredito()
-                                ->setFooter(false, $texto)
-                                ->cut()
-                                ->pulse();
-
-                        } catch (Exception $e) {
-                            $success = false;
-                            $msg = "error";
-                            $msg = $e->getMessage();
-                        } finally {
-                            $pos_printer->close();
-                        }
                     $return['success'] = true;
                     $return['message'] = "VENTA EXITOSA";
                     $return['showPrint'] = $this->validaImpreion();
@@ -389,7 +309,6 @@ class Facturacion
             }
         }
         return $return;
-        }
     }
 
 
@@ -1074,7 +993,7 @@ class Facturacion
         } catch (Exception $e) {
             return false;
         }
-    } 
+    }
 
     public function is_connected()
     {

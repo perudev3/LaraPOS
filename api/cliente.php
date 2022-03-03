@@ -188,7 +188,7 @@ function _find_reniec($buscar)
 
     try {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://clientapi.sistemausqay.com/dni.php?documento=" . $buscar . "");
+        curl_setopt($ch, CURLOPT_URL, "https://apiconsulta.tritiumperu.com/dni.php?documento=" . $buscar . "");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
         $output_ = json_decode($output);
@@ -246,7 +246,7 @@ function _find_sunat($buscar)
 
     try {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://clientapi.sistemausqay.com/ruc.php?documento=" . $buscar . "");
+        curl_setopt($ch, CURLOPT_URL, "https://apiconsulta.tritiumperu.com/ruc.php?documento=" . $buscar . "");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
         $output_ = json_decode($output);

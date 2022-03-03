@@ -14,8 +14,8 @@ use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 class PosPrinter
 {
     public $MAX_PRINTER_LENGTH = 45;
-    public $MAX_ITEM_LENGTH = 31;
-    public $MAX_QUANTITY_LENGTH = 6;
+    public $MAX_ITEM_LENGTH = 12;
+    public $MAX_QUANTITY_LENGTH = 9;
     public $MAX_TOTAL_LENGTH = 8;
     public $MAX_DETALLES = 34;
     public $MAX_MONTOS = 8;
@@ -35,6 +35,7 @@ class PosPrinter
     private $config;
     private $receipt;
     private $items;
+    private $items2;
     private $connection;
     private $idVenta;
     private $venta;
@@ -57,6 +58,10 @@ class PosPrinter
     private $subtotal;
     private $monto_icbper;
     private $icbper;
+    private $formas_de_pago;
+    private $cuotas;
+    private $tblcre;
+    private $cuota;
     
     
 
@@ -70,6 +75,7 @@ class PosPrinter
         $this->subtotal=0;
         $this->monto_icbper=0.30;
         $this->icbper='IMPUESTO BOLSA 2021';
+        $this->cuota=0;
        
 
         $this->isCoti=false;
@@ -85,8 +91,10 @@ class PosPrinter
         $this->cotizacion = $this->connection->consulta_arreglo("SELECT * FROM cotizacion where id = {$this->idVenta}");
         $this->cliente = $this->connection->consulta_arreglo("SELECT * FROM cliente where id = {$this->venta['id_cliente']}");
         $this->entrega = $this->connection->consulta_arreglo("SELECT * FROM entregas where id_venta = {$this->idVenta}");
-        $this->medio_pago = $this->connection->consulta_arreglo("SELECT * FROM venta_medio_pago WHERE id_venta = $this->idVenta");
+        $this->medio_pago = $this->connection->consulta_arreglo("SELECT group_concat(CONCAT(medio,'=', ROUND((monto-vuelto),2))) as medios,vuelto FROM venta_medio_pago WHERE id_venta = $this->idVenta GROUP BY id_venta");
         $this->ventas = $this->connection->consulta_arreglo("SELECT nombre FROM venta v, caja c WHERE v.id = $this->idVenta AND v.id_caja = c.id");
+        //$this->cuotas = $this->connection->consulta_arreglo("SELECT * FROM ventas_cuotas WHERE id_venta = $this->idVenta ");
+        $this->formas_de_pago = $this->connection->consulta_arreglo("SELECT CASE medio WHEN 'CREDITO' THEN 'A Credito' ELSE 'Al Contado' END as formas from venta_medio_pago WHERE id_venta = $this->idVenta GROUP BY formas ");
         $this->Descuento = $this->connection->consulta_arreglo("SELECT * FROM venta_medio_pago WHERE id_venta = $this->idVenta AND medio = 'DESCUENTO'");
         $this->itemsIncluye = $this->connection->consulta_arreglo("SELECT pv.id_producto
                 FROM producto_venta pv
@@ -94,7 +102,7 @@ class PosPrinter
                 WHERE pv.estado_fila=1 AND pv.id_venta = $this->idVenta
                 UNION
                 SELECT sv.id_servicio
-                FROM servicio_venta sv
+                FROM servicio_venta sv 
                 INNER JOIN servicio s ON sv.id_servicio = s.id
                 WHERE sv.id_venta = $idVenta
                 ");
@@ -176,7 +184,7 @@ class PosPrinter
  
         $this->printer->setJustification(Printer::JUSTIFY_CENTER);
         $this->printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
-        //$this->printer->text("{$this->config['nombre_negocio']}.\n");
+        $this->printer->text("{$this->config['nombre_negocio']}.\n");
         $this->printer->selectPrintMode();
         $this->printer->text("{$this->config['ruc']}.\n");
         $this->printer->text("{$this->config['razon_social']}.\n");
@@ -322,7 +330,7 @@ class PosPrinter
                     $this->total_igv = $this->total_igv-(($p['precio'] *$p['cantidad'])-$this->subtotal);
                 }
 
-                $this->items[] = new Item(str_pad($p['cantidad']  , $this->MAX_QUANTITY_LENGTH, ' ', STR_PAD_BOTH) . " " .str_pad( substr($nombre,0,$this->MAX_ITEM_LENGTH), $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH). " " . str_pad(number_format($p['total'], 2, '.', ''), $this->MAX_TOTAL_LENGTH), ' ', STR_PAD_LEFT);
+                $this->items[] = new Item(str_pad($p['cantidad']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH) . " " .str_pad( substr($nombre,0,$this->MAX_ITEM_LENGTH), $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH). " " . str_pad($p['precio']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH). " " . str_pad(number_format($p['total'], 2, '.', ''), $this->MAX_ITEM_LENGTH), ' ', STR_PAD_LEFT);
                 //$this->items[] = new Item($p['cantidad'] . " " . $nombre, number_format($p['total'], 2, '.', ''));
             }
         }
@@ -332,7 +340,7 @@ class PosPrinter
                 $this->Pro_total += $s['total'];
                 
                // $this->items[] = new Item($s['cantidad'] . " " . $s['nombre'], number_format($s['total'], 2, '.', ''));
-                $this->items[] = new Item(str_pad($s['cantidad'] , $this->MAX_QUANTITY_LENGTH, ' ', STR_PAD_BOTH) . " " .str_pad( $s['nombre'], $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH). " " . str_pad(number_format($s['total'], 2, '.', ''), $this->MAX_TOTAL_LENGTH), ' ', STR_PAD_LEFT);
+                $this->items[] = new Item(str_pad($s['cantidad'] , $this->MAX_QUANTITY_LENGTH, ' ', STR_PAD_BOTH) . " " .str_pad( $s['nombre'], $this->MAX_QUANTITY_LENGTH,' ',STR_PAD_BOTH). " " . str_pad(number_format($s['total'], 2, '.', ''), $this->MAX_QUANTITY_LENGTH), ' ', STR_PAD_LEFT);
             // $this->items[] = new Item(str_pad($c['cantidad'], $this->MAX_QUANTITY_LENGTH, ' ', STR_PAD_LEFT) . " " .str_pad( $c['nombre'], $this->MAX_ITEM_LENGTH), number_format(str_pad($c['precio'], $this->MAX_TOTAL_LENGTH, ' ', STR_PAD_LEFT), 2, '.', '')." ". number_format(str_pad(($c['precio']* $c['cantidad']), $this->MAX_TOTAL_LENGTH, ' ', STR_PAD_LEFT), 2, '.', ''));
             }
         }
@@ -358,10 +366,11 @@ class PosPrinter
                // $this->items[] = new Item(str_pad($c['cantidad'], $this->MAX_QUANTITY_LENGTH, ' ', STR_PAD_LEFT) . " " .str_pad( $c['nombre'], $this->MAX_ITEM_LENGTH), number_format(str_pad($c['precio'], $this->MAX_TOTAL_LENGTH, ' ', STR_PAD_LEFT), 2, '.', '')." ". number_format(str_pad(($c['precio']* $c['cantidad']), $this->MAX_TOTAL_LENGTH, ' ', STR_PAD_LEFT), 2, '.', ''));
             }
         }
-    
-            $header = str_pad("Cant.", $this->MAX_QUANTITY_LENGTH, ' ', STR_PAD_BOTH)
-            .str_pad("Producto", $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH)
-            .str_pad("Total", $this->MAX_TOTAL_LENGTH, ' ', STR_PAD_BOTH)
+        
+            $header = str_pad("Cant.", $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH)
+            .str_pad("Prod.", $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH)
+            .str_pad("Pre.", $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH)
+            .str_pad("Total", $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH)
             ."\n";
 
         $this->printer->setJustification(Printer::JUSTIFY_LEFT);
@@ -490,11 +499,41 @@ class PosPrinter
         $this->printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
         //$this->printer->text($total_paper->getAsString(32));
         //$this->printer->feed();
-        $this->printer->text(strtoupper(CifrasEnLetras::convertirNumeroEnLetras(number_format($this->Pro_total, 2, ',', '.'), 1, "sol", "soles", true, "centimo", "", false)));
-
+        
+        $this->printer->text(strtoupper(CifrasEnLetras::convertirNumeroEnLetras(number_format($this->Pro_total, 2, ',', '.'), 1, "sol", "soles", true, "centimos", "", false)));
+        $this->printer->text("\n");
+        
         $this->printer->selectPrintMode();
 
         return $this;
+    }
+
+    public function setCredito()
+    {
+        $cuotas = $this->connection->consulta_arreglo("SELECT * FROM ventas_cuotas WHERE id_venta = $this->idVenta ");
+        if (is_array($cuotas)) {
+                foreach ($cuotas as $cu){
+                $this->items2[] = new Item(str_pad($cu['cuota']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH) . " " . str_pad($cu['fecha_pago']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH). " " . str_pad(number_format($cu['importe'], 2, '.', ''), $this->MAX_ITEM_LENGTH), ' ', STR_PAD_LEFT);
+                }                
+                $tblcre = str_pad("CUOTA", $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH)
+                .str_pad("VEN.", $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH)
+                .str_pad("MONTO", $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH)
+                ."\n";
+                
+        }
+        $this->printer->setJustification(Printer::JUSTIFY_CENTER);
+        $this->printer->text("Medios de pago: {$this->medio_pago['medios']} \n");
+        $this->printer->text("Formas de pago: {$this->formas_de_pago['formas']} \n");
+        $this->printer->text($this->tblcre);
+        foreach ($this->items2 as $item2) {
+            //$this->printer->text(preg_replace("[\n|\r|\n\r]", "", $item)); 
+            $this->printer->text($item2); 
+        }
+        $this->printer->setEmphasis(true);
+        $this->printer->setEmphasis(false);
+        $this->printer->feed();
+        return $this;
+
     }
 
 
@@ -503,6 +542,11 @@ class PosPrinter
         $usuario = $this->connection->consulta_arreglo("SELECT * FROM usuario where id = {$this->venta['id_usuario']}");
         $this->printer->feed(2);
         $this->printer->setJustification(Printer::JUSTIFY_CENTER);
+        
+       
+        
+        
+        
         $this->printer->text("Usted ha sido atendido por {$usuario['nombres_y_apellidos']}\n");
         $this->printer->text("Gracias por su Preferencia! \n");
         $this->printer->feed(1);
@@ -517,9 +561,9 @@ class PosPrinter
         }
 
         $this->printer->setEmphasis(true);
-        $this->printer->text("USQAY, es Facturacion Electronica visitanos en\n");
-        $this->printer->text("www.sistemausaqy.com\n");
-        $this->printer->text("www.facebook.com/usqayperu\n");
+        $this->printer->text("LaraPOS, es Facturacion Electronica visitanos en\n");
+        $this->printer->text("www.lara-net.com\n");
+        //$this->printer->text("www.facebook.com/usqayperu\n");
         $this->printer->setEmphasis(false);
         //$this->printer->feed(2);
         //$this->printer->text($this->venta['fecha_hora'] . "\n");

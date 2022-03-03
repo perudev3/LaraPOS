@@ -738,7 +738,7 @@ if (isset($_POST['op'])) {
             //$medio="[{'id_venta':'1', 'medio':'EFECTIVO','monto':'100','vuelto':'80','moneda':'PEN'} ]";
            // $facturacion = new Facturacion($_POST['cliente'],$_POST['id'],$_POST['tipo_documento'],$_POST['descuento_global'],$_POST['medio_pago']);
           
-            $facturacion = new Facturacion($_POST['cliente'],$_POST['id'],$_POST['tipo_documento'],$_POST['descuento_global'],$_POST['medio_pago'],$_POST['tipo_guia'],$_POST['serie_numero'],$_POST['observaciones'],$_POST['expiresDate'],$_POST['venta_al_credito']);
+            $facturacion = new Facturacion($_POST['cliente'],$_POST['id'],$_POST['tipo_documento'],$_POST['descuento_global'],$_POST['medio_pago'],$_POST['tipo_guia'],$_POST['serie_numero'],$_POST['observaciones'],$_POST['expiresDate'],$_POST['venta_al_credito'],$_POST['id_caja']);
             echo json_encode($facturacion->testTypeDocument());
             //var_dump($facturacion->testTypeDocument());
         break;
@@ -769,7 +769,7 @@ function _find_reniec($buscar)
 
     try {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://clientapi.sistemausqay.com/dni.php?documento=" . $buscar . "");
+        curl_setopt($ch, CURLOPT_URL, "https://apiconsulta.tritiumperu.com/dni.php?documento=" . $buscar . "");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
         $output_ = json_decode($output);
@@ -828,7 +828,7 @@ function _find_sunat($buscar)
 
     try {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://clientapi.sistemausqay.com/ruc.php?documento=" . $buscar . "");
+        curl_setopt($ch, CURLOPT_URL, "https://apiconsulta.tritiumperu.com/ruc.php?documento=" . $buscar . "");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
         $output_ = json_decode($output);
