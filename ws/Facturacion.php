@@ -306,6 +306,7 @@ class Facturacion
                                             ->setTitleReceipt()
                                             ->setItems()
                                             ->setMontos()
+                                            ->setCredito()
                                             ->setFooter(false, $texto)
                                             ->cut()
                                             ->pulse();

@@ -510,30 +510,31 @@ class PosPrinter
 
     public function setCredito()
     {
-        $cuotas = $this->connection->consulta_arreglo("SELECT * FROM ventas_cuotas WHERE id_venta = $this->idVenta ");
+        $this->printer->setJustification(Printer::JUSTIFY_CENTER);
+        $this->printer->text("Medios de pago: {$this->medio_pago['medios']} \n");
+        $this->printer->text("Formas de pago: {$this->formas_de_pago['formas']} \n");
+        $cuotas = $this->connection->consulta_matriz("SELECT * FROM ventas_cuotas WHERE id_venta = {$this->idVenta}");
         if (is_array($cuotas)) {
                 foreach ($cuotas as $cu){
-                $this->items2[] = new Item(str_pad($cu['cuota']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH) . " " . str_pad($cu['fecha_pago']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH). " " . str_pad(number_format($cu['importe'], 2, '.', ''), $this->MAX_ITEM_LENGTH), ' ', STR_PAD_LEFT);
-                }                
+                $this->cred[] = new Item(str_pad($cu['cuota']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH) . " " . str_pad($cu['fecha_pago']  , $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH). " " . str_pad(number_format($cu['importe'], 2, '.', ''), $this->MAX_ITEM_LENGTH), ' ', STR_PAD_LEFT);
+                //$this->cred[] = new Item(str_pad($cu['fecha_pago'],$this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH));
+                
+                }           
                 $tblcre = str_pad("CUOTA", $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH)
                 .str_pad("VEN.", $this->MAX_ITEM_LENGTH,' ',STR_PAD_BOTH)
                 .str_pad("MONTO", $this->MAX_ITEM_LENGTH, ' ', STR_PAD_BOTH)
                 ."\n";
-                
+                $this->printer->text($tblcre);$this->printer->setEmphasis(false);
+                foreach ($this->cred as $credi) {
+                    //$this->printer->text(preg_replace("[\n|\r|\n\r]", "", $item)); 
+                    $this->printer->text($credi); 
+                }
         }
-        $this->printer->setJustification(Printer::JUSTIFY_CENTER);
-        $this->printer->text("Medios de pago: {$this->medio_pago['medios']} \n");
-        $this->printer->text("Formas de pago: {$this->formas_de_pago['formas']} \n");
-        $this->printer->text($this->tblcre);
-        foreach ($this->items2 as $item2) {
-            //$this->printer->text(preg_replace("[\n|\r|\n\r]", "", $item)); 
-            $this->printer->text($item2); 
-        }
+        
         $this->printer->setEmphasis(true);
-        $this->printer->setEmphasis(false);
         $this->printer->feed();
         return $this;
-
+        
     }
 
 
@@ -542,11 +543,6 @@ class PosPrinter
         $usuario = $this->connection->consulta_arreglo("SELECT * FROM usuario where id = {$this->venta['id_usuario']}");
         $this->printer->feed(2);
         $this->printer->setJustification(Printer::JUSTIFY_CENTER);
-        
-       
-        
-        
-        
         $this->printer->text("Usted ha sido atendido por {$usuario['nombres_y_apellidos']}\n");
         $this->printer->text("Gracias por su Preferencia! \n");
         $this->printer->feed(1);
